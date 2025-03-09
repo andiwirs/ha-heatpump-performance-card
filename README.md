@@ -1,7 +1,7 @@
 # Home Assistant Heatpump Performance Card
 
-A custom Home Assistant card that displays heat pump performance by reading two sensor entities (electrical and thermal energy) and calculating the coefficient of performance (COP). 
-The card listens for date range selections provided by an energy-date-selection card and fetches historical data from Home Assistant's Data Recoder or Statistics. 
+A custom Home Assistant card that displays heat pump performance by reading two sensor entities (electrical and thermal energy) and calculating the coefficient of performance (COP).
+The card listens for date range selections provided by an energy-date-selection card and fetches historical data from Home Assistant's Data Recoder or Statistics. Additionally, it can display time-weighted average values for outdoor temperature and humidity over the selected time period.
 
 ![Heatpump Performance Example](cards.jpg)
 
@@ -24,22 +24,30 @@ entities:
     name: Electrical Energy
   - entity: sensor.thermal_energy
     name: Thermal Energy
+outdoor_temperature: # Optional: Display outdoor temperature average
+  entity: sensor.outdoor_temperature
+  name: Outdoor Temperature
+outdoor_humidity: # Optional: Display outdoor humidity average
+  entity: sensor.outdoor_humidity
+  name: Outdoor Humidity
 ```
 
-In this example, the card will display the two sensor values and calculate the Performance (COP) based on the retrieved data.
+In this example, the card will display the two sensor values, calculate the Performance (COP) based on the retrieved data, and show time-weighted average values for outdoor temperature and humidity over the selected period.
 
 ## Installation
 
 #### HACS
-1. Navigate to your home assistants HACS tab and open the "Frontend" section
-2. Click the 3 dot menu in the top right hand corner.
-3. Select "Custom repositories"
-4. Enter `andiwirs/ha-heatpump-performance-card` as the repository and `Dashboard` as the category.
-5. Press "Add"
-6. The `heatpump-performance-card` should now be available in HACS. Install it and refresh your browser.
+1. Navigate to the HACS tab in your Home Assistant and open the Frontend section.
+2. Click the three-dot menu in the top right corner.
+3. Select Custom repositories.
+4. Enter `andiwirs/ha-heatpump-performance-card` as the repository and select `Dashboard` as the category.
+5. Click Add and then install the `heatpump-performance-card` from HACS.
+6. Refresh your browser.
 
 See the [HACS Custom Repository](https://hacs.xyz/docs/faq/custom_repositories/) page for full details.
 
 #### Manual
-1. Copy `heatpump-performance-card.js` to your `/hass/www` folder.
-2. Click on `Edit Dashboard`, `Manage resources` add `/local/heatpump-performance-card.js` as `JavaScript Module`.
+1. Copy the `heatpump-performance-card.js` file into your Home Assistant's `/www` folder.
+2. In Home Assistant, go to your Dashboard, click on Edit Dashboard, then Manage Resources.
+3. Add `/local/heatpump-performance-card.js` as a JavaScript Module.
+4. Save and refresh your Home Assistant dashboard.
